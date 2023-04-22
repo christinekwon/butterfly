@@ -17,13 +17,7 @@ class Wing extends Group {
         };
 
         this.tubeMaterial = new THREE.MeshStandardMaterial({
-            // color: 0xffd505,
-            // color: 0xffffff,
-            // green
-            // color: "0x87ff97",
             color: new THREE.Color(color),
-            // 0x333333
-            // emissive: 0x333333,
             emissive: 0x000000,
             metalness: 1.5, // between 0 and 1
             roughness: 0, // between 0 and 1
@@ -47,8 +41,6 @@ class Wing extends Group {
         this.draw_bezier_curve_top = this.draw_bezier_curve_top.bind(this);
         this.draw_bezier_curve_bottom = this.draw_bezier_curve_bottom.bind(this);
 
-        this.draw_sphere_top = this.draw_sphere_top.bind(this);
-
         this.vectors_tr.push(new THREE.Vector3(0, 0, 0));
         this.vectors_tl.push(new THREE.Vector3(0, 0, 0));
 
@@ -66,7 +58,6 @@ class Wing extends Group {
         }
         this.vectors_br.push(new THREE.Vector3(0, 0, 0));
         this.vectors_bl.push(new THREE.Vector3(0, 0, 0));
-        // this.draw_catmull_rom();
 
         for (let i = 0; i < numPoints_top - 1; i = i + 3) {
             this.draw_bezier_curve_top(i);
@@ -87,12 +78,10 @@ class Wing extends Group {
         this.butterfly.translateY(-15);
         this.butterfly.rotateX(Math.PI / 8);
         this.butterfly.rotateZ(Math.PI / 6);
-        // this.butterfly.rotateY(-Math.PI / 8);
 
     }
 
     get_random_top_point(xMin, xMax, yMin, yMax) {
-        // Math.random() * (max - min) + min;
         let x = Math.random() * (xMax - xMin) + xMin;
         let y = Math.random() * (yMax - yMin) + yMin;
         this.vectors_tr.push(new THREE.Vector3(x, y, 0));
@@ -100,7 +89,6 @@ class Wing extends Group {
     }
 
     get_random_bottom_point(xMin, xMax, yMin, yMax) {
-        // Math.random() * (max - min) + min;
         let x = Math.random() * (xMax - xMin) + xMin;
         let y = Math.random() * (yMax - yMin) + yMin;
         this.vectors_br.push(new THREE.Vector3(x, y, 0));
@@ -120,10 +108,6 @@ class Wing extends Group {
         this.add(curveObject);
     }
 
-    draw_sphere_top(x, y, z) {
-        // radius widthseg, heightseg
-
-    }
 
     draw_bezier_curve_top(index) {
         // right side
@@ -166,13 +150,6 @@ class Wing extends Group {
         sphere.position.set(this.vectors_tl[index].x, this.vectors_tl[index].y, this.vectors_tl[index].z);
         this.add(sphere);
         this.left.add(sphere);
-
-        // this.draw_sphere_top(this.vectors_tl[index].x, this.vectors_tl[index].y, this.vectors_tl[index].z);
-
-        // const curveObject = new THREE.Line(curveGeometry, this.tubeMaterial);
-
-        // const curveObject = new THREE.Line(geometry, material);
-        // this.add(curveObject);
     }
 
     draw_bezier_curve_bottom(index) {
@@ -217,12 +194,6 @@ class Wing extends Group {
         sphere.position.set(this.vectors_bl[index].x, this.vectors_bl[index].y, this.vectors_bl[index].z);
         this.add(sphere);
         this.right.add(sphere);
-
-
-        // const curveObject = new THREE.Line(curveGeometry, this.tubeMaterial);
-
-        // const curveObject = new THREE.Line(geometry, material);
-        // this.add(curveObject);
     }
 
 
@@ -248,8 +219,6 @@ class Wing extends Group {
             this.points.push(points[3]);
             // path, tubularSsegments, radius, radialsegments
             const curveGeometry = new THREE.TubeGeometry(path, 20, radius, 8, false);
-            // const curveGeometry = new THREE.TubeGeometry(path, 20, 1, 8, false);
-            // const curveObject = new THREE.Line(curveGeometry, material);
             const curveMesh = new THREE.Mesh(curveGeometry, this.tubeMaterial);
             this.add(curveMesh);
             this.bezier_curves.push(curveMesh);
@@ -264,11 +233,8 @@ class Wing extends Group {
             this.points.push(points[1]);
             this.points.push(points[2]);
             this.points.push(points[3]);
-            // path, tubularSsegments, radius, radialsegments
 
             curveGeometry = new THREE.TubeGeometry(path, 20, radius, 8, false);
-            // curveGeometry = new THREE.TubeGeometry(path, 20, 1, 8, false);
-            // const curveObject = new THREE.Line(curveGeometry, material);
             curveMesh = new THREE.Mesh(curveGeometry, this.tubeMaterial);
             this.add(curveMesh);
             this.bezier_curves.push(curveMesh);
@@ -290,12 +256,6 @@ class Wing extends Group {
         this.left.rotateY(Math.PI / 200 * rotDirection);
         this.right.rotateY(Math.PI / 200 * -rotDirection);
         this.state.count++;
-        // this.left.rotateY(Math.PI / 3);
-        // this.right.rotateY(-Math.PI / 3);
-
-        // this.butterfly.rotateZ(Math.PI / 200 * rotDirection);
-        // this.butterfly.rotateY(0.005);
-        // this.butterfly.rotateX(0.005);
 
     }
 }

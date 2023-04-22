@@ -26,10 +26,7 @@ let color;
 if (name != null) {
     color = list[name]['color'];
 } else {
-    // color = 'olive';
-    // color = 'lemonchiffon';
     color = "rgb(135, 255, 151)";
-    // color = "darkorange";
 }
 
 const scene = new MainScene(color);
@@ -37,9 +34,6 @@ const camera = new PerspectiveCamera();
 const renderer = new WebGLRenderer({ antialias: true });
 
 // Set up camera
-// camera.position.set(10, 50, -100);
-// camera.position.set(0, 100, -100);
-// camera.position.set(0, 50, 0);
 camera.position.set(0, 0, 150);
 camera.lookAt(new Vector3(0, 0, 0));
 

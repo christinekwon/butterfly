@@ -1,6 +1,6 @@
 import * as Dat from 'dat.gui';
 import { Scene, Color } from 'three';
-import { Spiral, Wing } from 'objects';
+import { Wing } from 'objects';
 import { BasicLights } from 'lights';
 import * as THREE from "three";
 
@@ -19,7 +19,6 @@ class MainScene extends Scene {
 
         // Init state
         this.state = {
-            // gui: new Dat.GUI(), // Create GUI for scene
             rotationSpeed: 1,
             updateList: [],
         };
@@ -27,7 +26,6 @@ class MainScene extends Scene {
         // Set background to a nice color
         this.background = new Color(0x000000);
 
-        // Add spirals to scene
 
         var envMap = new THREE.CubeTextureLoader()
             .load([
@@ -35,10 +33,6 @@ class MainScene extends Scene {
                 POSY, NEGY,
                 POSZ, NEGZ
             ]);
-
-        // console.log(DATA);
-
-
 
         // count should be multiple of 4 + 1
         // 3x + 4
@@ -49,9 +43,6 @@ class MainScene extends Scene {
 
         const lights = new BasicLights();
         this.add(lights);
-
-        // Populate GUI
-        // this.state.gui.add(this.state, 'rotationSpeed', -15, 15);
     }
 
     addToUpdateList(object) {
@@ -60,7 +51,6 @@ class MainScene extends Scene {
 
     update(timeStamp) {
         const { rotationSpeed, updateList } = this.state;
-        // this.rotation.y = (rotationSpeed * timeStamp) / 3000;
 
         // Call update for each object in the updateList
         for (const obj of updateList) {
